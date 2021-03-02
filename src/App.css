@@ -1,0 +1,26 @@
+.App {
+  padding: 30px;
+  display: flex;
+}
+
+.App > div {
+  margin-right: 50px;
+}
+
+.is-done {
+  opacity: 0.7;
+  text-decoration: line-through;
+}
+
+.active {
+  background-color: khaki;
+}
+
+.error {
+  border: 2px solid red;
+  outline: transparent;
+}
+
+.error-message {
+  color: red;
+}

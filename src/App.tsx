@@ -78,6 +78,11 @@ function App() {
         }
     }
 
+    function removeTodoList (todoListID: string) {
+       setTodoLists(todoLists.filter(tl => tl.id !== todoListID))
+        delete tasks[todoListID]
+    }
+
     return (
         <div className="App">
             {
@@ -97,6 +102,7 @@ function App() {
                             filter={tl.filter}
                             addTask={addTask}
                             removeTask={removeTask}
+                            removeTodoList={removeTodoList}
                             changeTodoListFilter={changeTodoListFilter}
                             changeTaskStatus={changeTaskStatus}/>
                     )

@@ -5,8 +5,9 @@ import {FilterValuesType, TaskType} from "./App";
 type TodoListPropsType = {
     id: string
     title: string
-    filter: FilterValuesType
     tasks: Array<TaskType>
+    filter: FilterValuesType
+    removeTodoList: (todoListID: string) => void
     addTask: (title: string, todoListId: string) => void
     removeTask: (taskID: string, todoListId: string) => void
     changeTaskStatus: (takID: string, isDone: boolean, todoListId: string) => void
@@ -48,6 +49,9 @@ function TodoList(props: TodoListPropsType) {
         setTitle(e.currentTarget.value)
         setError(null)
     }
+    const removeTodoList = () => {
+        props.removeTodoList(props.id)
+    }
 
     const tasks = props.tasks.map(t => {
         const removeTask = () => props.removeTask(t.id, props.id)
@@ -69,7 +73,7 @@ function TodoList(props: TodoListPropsType) {
 
     return (
         <div>
-            <h3>{props.title}</h3>
+            <h3>{props.title}<button onClick={removeTodoList}>X</button></h3>
             <div>
                 <input
                     value={title}

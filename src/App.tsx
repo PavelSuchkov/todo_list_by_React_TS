@@ -160,7 +160,7 @@ function App() {
                 <Grid container style={{padding: '10px'}}>
                     <AddItemForm addItem={addTodoList}/>
                 </Grid>
-                <Grid container spacing={3}>
+                <Grid container spacing={2}>
                     {todoListComponent}
                 </Grid>
             </Container>

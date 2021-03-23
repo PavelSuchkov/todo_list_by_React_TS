@@ -13,13 +13,13 @@ export type TaskType = {
 }
 export type FilterValuesType = "all" | "active" | "completed";
 
-type TodoListType = {
+export type TodoListType = {
     id: string
     title: string
     filter: FilterValuesType
 }
 
-type TaskStateType = {
+export type TaskStateType = {
     [key: string]: TaskType[]
 }
 
@@ -80,6 +80,8 @@ function App() {
             setTasks({...tasks})
         }
     }
+
+
 
     function changeTodoListFilter(newFilterValue: FilterValuesType, todoListId: string) {
         const todoList = todoLists.find(tl => tl.id === todoListId)

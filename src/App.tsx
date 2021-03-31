@@ -19,7 +19,7 @@ export type TodoListType = {
     filter: FilterValuesType
 }
 
-export type TaskStateType = {
+export type TasksStateType = {
     [key: string]: TaskType[]
 }
 
@@ -33,7 +33,7 @@ function App() {
         {id: todoListId_2, title: 'What to buy', filter: 'all'}
     ])
 
-    const [tasks, setTasks] = useState<TaskStateType>({
+    const [tasks, setTasks] = useState<TasksStateType>({
         [todoListId_1]: [
             {id: v1(), title: "React", isDone: false},
             {id: v1(), title: "Redux", isDone: true},
@@ -60,7 +60,7 @@ function App() {
             title: title,
             isDone: false
         }
-        tasks[todoListId] = [newTask, ...tasks[todoListId]] //добавляем новую такску в копию обновленношл массива тасок
+        tasks[todoListId] = [newTask, ...tasks[todoListId]]
         setTasks({...tasks})
     }
 
@@ -80,8 +80,6 @@ function App() {
             setTasks({...tasks})
         }
     }
-
-
 
     function changeTodoListFilter(newFilterValue: FilterValuesType, todoListId: string) {
         const todoList = todoLists.find(tl => tl.id === todoListId)
@@ -116,8 +114,8 @@ function App() {
     }
 
     const todoListComponent = todoLists.map(tl => {
-        let tasksForTodoList = tasks[tl.id]
 
+        let tasksForTodoList = tasks[tl.id]
         if (tl.filter === "active") {
             tasksForTodoList = tasksForTodoList.filter(t => !t.isDone);
         }
@@ -126,7 +124,7 @@ function App() {
         }
         return (
             <Grid item key={tl.id}>
-                <Paper elevation={6} style={{padding: '10px'}}>
+                <Paper elevation={3} style={{padding: '10px'}}>
                     <TodoList
                         todoListID={tl.id}
                         title={tl.title}
@@ -146,7 +144,6 @@ function App() {
     })
     return (
         <div className="App">
-
             <AppBar position="static">
                 <Toolbar>
                     <IconButton edge="start" color="inherit" aria-label="menu">

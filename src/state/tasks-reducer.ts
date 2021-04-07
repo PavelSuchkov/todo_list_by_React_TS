@@ -1,6 +1,6 @@
 import {TasksStateType, TaskType} from "../App";
 import {v1} from "uuid";
-import {AddTodoListActionType} from "./todolists-reducer";
+import {AddTodoListActionType, RemoveTodoListActionType} from "./todolists-reducer";
 
 type RemoveTaskActionType = {
     type: 'REMOVE-TASK'
@@ -29,6 +29,7 @@ type ChangeTaskTitle = {
 
 export type ActionsTypes = RemoveTaskActionType | AddTaskActionType
     | ChangeTaskStatusType | ChangeTaskTitle | AddTodoListActionType
+    | RemoveTodoListActionType
 
 
 export const tasksReducer = (state: TasksStateType, action: ActionsTypes) => {
@@ -40,18 +41,14 @@ export const tasksReducer = (state: TasksStateType, action: ActionsTypes) => {
             copyState[action.todoListId] = copyState[action.todoListId].filter(task => task.id !== action.taskId)
             return copyState
         }
-
         case 'ADD-TASK': {
-            // let copyState = {...state}
             const newTask: TaskType = {
                 id: v1(),
                 title: action.title,
                 isDone: false
             }
-            // copyState[action.todoListId] = [newTask, ...state[action.todoListId]]
             return {...state, [action.todoListId]: [newTask, ...state[action.todoListId]]}
         }
-
         case 'CHANGE-TASK-STATUS': {
             return {
                 ...state,
@@ -64,7 +61,6 @@ export const tasksReducer = (state: TasksStateType, action: ActionsTypes) => {
                 })
             }
         }
-
         case 'CHANGE-TASK-TITLE': {
             return {
                 ...state,
@@ -77,10 +73,17 @@ export const tasksReducer = (state: TasksStateType, action: ActionsTypes) => {
                 })
             }
         }
-
         case "ADD-TODOLIST":
             let todoListId = action.todoListId
-            return {...state, [todoListId] : []}
+            return {...state, [todoListId]: []}
+
+
+        case "REMOVE-TODOLIST":
+        {
+            let copyState = {...state}
+            delete copyState[action.id]
+            return copyState
+        }
 
         default:
             return state

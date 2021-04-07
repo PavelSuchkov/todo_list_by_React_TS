@@ -67,7 +67,9 @@ function TodoList(props: TodoListPropsType) {
             </h3>
             <AddItemForm addItem={addTask}/>
             <div style={ { listStyle: 'none', paddingLeft: '0'} }>
+
                 {tasks}
+
             </div>
             <div>
                 <Button variant={'outlined'} color={props.filter === 'all' ? 'secondary' : 'primary'}

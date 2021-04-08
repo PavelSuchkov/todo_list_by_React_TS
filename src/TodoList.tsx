@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {FilterValuesType, TaskType} from "./App";
+import {FilterValuesType, TaskType} from "./AppWithRedux";
 import {AddItemForm} from "./components/AddItemForm";
 import {EditableSpan} from "./components/EditableSpan";
 import {Button, Checkbox, IconButton} from "@material-ui/core";
@@ -20,7 +20,13 @@ type TodoListPropsType = {
     changeTodoListTitle: (newTitleValue: string, todoListId: string) => void
 }
 
-function TodoList(props: TodoListPropsType) {
+export function TodoList(props: TodoListPropsType) {
+
+    // let todo = useSelector<AppRootStateType, TodoListPropsType>( state => {
+    //     return state.todoLists.filter(todo => todo.id === props.todoListID)[0]
+    // })
+    //
+    // let dispatch = useDispatch()
 
     const addTask = (title: string) => props.addTask(title, props.todoListID)
 
@@ -35,6 +41,7 @@ function TodoList(props: TodoListPropsType) {
     const changeTodoListTitle = (title: string) => props.changeTodoListTitle(title, props.todoListID)
 
     const tasks = props.tasks.map(t => {
+
         const removeTask = () => props.removeTask(t.id, props.todoListID)
 
         const changeTaskStatus = (e: ChangeEvent<HTMLInputElement>) =>

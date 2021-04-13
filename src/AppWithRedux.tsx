@@ -106,6 +106,7 @@ function AppWithRedux() {
     const todoListComponent = todoLists.map(tl => {
 
         let tasksForTodoList = tasks[tl.id]
+
         if (tl.filter === "active") {
             tasksForTodoList = tasksForTodoList.filter(t => !t.isDone);
         }

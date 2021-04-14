@@ -49,7 +49,9 @@ export const tasksReducer = (state = initialState, action: ActionsTypes) => {
                 title: action.title,
                 isDone: false
             }
-            return {...state, [action.todoListId]: [newTask, ...state[action.todoListId]]}
+            let a =  {...state, [action.todoListId]: [newTask, ...state[action.todoListId]]}
+            debugger
+            return a
         }
         case 'CHANGE-TASK-STATUS': {
             return {

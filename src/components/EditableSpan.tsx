@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent, KeyboardEvent, useCallback, useState} from 'react';
 import {TextField} from "@material-ui/core";
 
 type EditableSpanPropsType = {
@@ -6,36 +6,38 @@ type EditableSpanPropsType = {
     changeTitle: (newTitle: string) => void
 }
 
-export function EditableSpan(props: EditableSpanPropsType) {
+export const EditableSpan = React.memo(({title,
+                                            changeTitle }: EditableSpanPropsType) => {
+
+    console.log('Editable span was rendered')
 
     const [editMode, setEditMode] = useState<boolean>(false);
-    const [title, setTitle] = useState<string>(props.title);
+    const [taskTitle, setTaskTitle] = useState<string>(title);
 
-    const onEditMode = () => setEditMode(true);
+    const onEditMode = useCallback(() => setEditMode(true), []);
 
-    const offEditMode = () =>{
+    const offEditMode = useCallback(() => {
         setEditMode(false);
-        props.changeTitle(title);
-    }
+        changeTitle(taskTitle);
+    }, [changeTitle, taskTitle])
 
-    const onChangeHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value)
+    const onChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) =>
+        setTaskTitle(e.currentTarget.value), []);
 
-    const onEnter = (e: KeyboardEvent<HTMLInputElement>) =>{
-        if(e.key === 'Enter'){
+    const onEnter = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
             offEditMode();
-           /* setEditMode(false)
-            props.changeTitle(title)*/
         }
-    }
+    }, [offEditMode]);
+
     return (
         editMode
-            ? <TextField id="standard-basic" value={title}
+            ? <TextField id="standard-basic" value={taskTitle}
                          autoFocus
                          onBlur={offEditMode}
                          onChange={onChangeHandler}
                          onKeyPress={onEnter}
-                         />
-
-            : <span onDoubleClick={onEditMode}>{props.title}</span>
+            />
+            : <span onDoubleClick={onEditMode}>{title}</span>
     )
-}
+})

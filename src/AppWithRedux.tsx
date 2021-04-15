@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import './App.css';
 import TodoList from "./TodoList";
 import {AddItemForm} from "./components/AddItemForm";
@@ -10,7 +10,6 @@ import {
     ChangeTodoListTitleAC,
     RemoveTodoListAC
 } from "./state/todolists-reducer";
-import {addTaskAC, changeTaskStatusAC, changeTitleAC, removeTaskAC} from "./state/tasks-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
 
@@ -60,26 +59,26 @@ function AppWithRedux() {
         dispatch(action)
     }*/
 
-    function changeTodoListFilter(newFilterValue: FilterValuesType, todoListId: string) {
+    const changeTodoListFilter = useCallback((newFilterValue: FilterValuesType, todoListId: string) => {
         let action = ChangeTodoListFilterAC(todoListId, newFilterValue)
         dispatch(action)
-    }
+    }, [dispatch])
 
-    function changeTodoListTitle(newTitleValue: string, todoListId: string) {
+    const changeTodoListTitle = useCallback((newTitleValue: string, todoListId: string) => {
         let action = ChangeTodoListTitleAC(todoListId, newTitleValue)
         dispatch(action)
 
-    }
+    }, [dispatch])
 
-    function removeTodoList(todoListID: string) {
+    const removeTodoList = useCallback((todoListID: string) => {
         let action = RemoveTodoListAC(todoListID)
         dispatch(action)
-    }
+    }, [dispatch])
 
-    function addTodoList(title: string) {
+    const addTodoList = useCallback((title: string) => {
         let action = AddTodoListAC(title)
         dispatch(action)
-    }
+    }, [dispatch])
 
     const todoListComponent = todoLists.map(tl => {
 
@@ -88,9 +87,9 @@ function AppWithRedux() {
                 <Paper elevation={3} style={{padding: '10px'}}>
                     <TodoList
                         key={tl.id}
-                        todoListID={tl.id}
                         title={tl.title}
                         filter={tl.filter}
+                        todoListID={tl.id}
                         removeTodoList={removeTodoList}
                         changeTodoListFilter={changeTodoListFilter}
                         changeTodoListTitle={changeTodoListTitle}

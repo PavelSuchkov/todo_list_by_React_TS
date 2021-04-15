@@ -30,34 +30,10 @@ export type TasksStateType = {
     [key: string]: TaskType[]
 }
 
-function AppWithRedux() {
+const  AppWithRedux = React.memo(() => {
 
     let dispatch = useDispatch()
     let todoLists = useSelector<AppRootStateType, TodoListType[]>(state => state.todoLists)
-
-   /* let tasks = useSelector<AppRootStateType, TasksStateType>(state => state.tasks)
-
-
-
-    function removeTask(taskID: string, todoListId: string) {
-        let action = removeTaskAC(taskID, todoListId)
-        dispatch(action)
-    }
-
-    function addTask(title: string, todoListId: string) {
-        let action = addTaskAC(title, todoListId)
-        dispatch(action)
-    }
-
-    function changeTaskStatus(taskID: string, isDone: boolean, todoListId: string) {
-        let action = changeTaskStatusAC(taskID, isDone, todoListId);
-        dispatch(action)
-    }
-
-    function changeTaskTitle(taskID: string, newTitle: string, todoListId: string) {
-        let action = changeTitleAC(taskID, newTitle, todoListId)
-        dispatch(action)
-    }*/
 
     const changeTodoListFilter = useCallback((newFilterValue: FilterValuesType, todoListId: string) => {
         let action = ChangeTodoListFilterAC(todoListId, newFilterValue)
@@ -121,7 +97,7 @@ function AppWithRedux() {
             </Container>
         </div>
     );
-}
+})
 export default AppWithRedux;
 
 

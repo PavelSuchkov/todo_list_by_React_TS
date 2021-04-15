@@ -73,7 +73,6 @@ export const TodoList = React.memo(({
             dispatch(changeTaskStatusAC(taskId, isDone, todoListID))
 
         const changeTaskTitle = (taskId: string, newTitle: string) => {
-
             dispatch(changeTitleAC(taskId, newTitle, todoListID))
         }
 

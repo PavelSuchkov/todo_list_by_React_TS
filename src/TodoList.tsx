@@ -67,8 +67,6 @@ export const TodoList = React.memo(({
 
     const filteredTasks = tasksForTodoList.map((t) => {
 
-
-
         // const changeTaskStatus = (taskId: string, isDone: boolean) =>
         //     dispatch(changeTaskStatusAC(taskId, isDone, todoListID))
         //

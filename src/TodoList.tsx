@@ -6,7 +6,7 @@ import {Button, IconButton} from "@material-ui/core";
 import {Delete} from "@material-ui/icons";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootStateType} from "./state/store";
-import {addTaskAC, changeTaskStatusAC, changeTitleAC, removeTaskAC} from "./state/tasks-reducer";
+import {addTaskAC} from "./state/tasks-reducer";
 import {Task} from "./components/Task";
 
 
@@ -67,22 +67,24 @@ export const TodoList = React.memo(({
 
     const filteredTasks = tasksForTodoList.map((t) => {
 
-        const removeTask = (id: string) => dispatch(removeTaskAC(id, todoListID));
 
-        const changeTaskStatus = (taskId: string, isDone: boolean) =>
-            dispatch(changeTaskStatusAC(taskId, isDone, todoListID))
 
-        const changeTaskTitle = (taskId: string, newTitle: string) => {
-            dispatch(changeTitleAC(taskId, newTitle, todoListID))
-        }
+        // const changeTaskStatus = (taskId: string, isDone: boolean) =>
+        //     dispatch(changeTaskStatusAC(taskId, isDone, todoListID))
+        //
+        // const changeTaskTitle = (taskId: string, newTitle: string) => {
+        //     dispatch(changeTitleAC(taskId, newTitle, todoListID))
+        // }
 
         return (
-            <Task task={t}
+            <Task
+                todolistId={todoListID}
+                task={t}
                   isDone={t.isDone}
                   title={t.title}
-                  changeTaskStatus={changeTaskStatus}
-                  changeTaskTitle={changeTaskTitle}
-                  removeTask={removeTask}
+                  // changeTaskStatus={changeTaskStatus}
+                  // changeTaskTitle={changeTaskTitle}
+                  // removeTask={removeTask}
                   key={t.id}/>
         )
     })

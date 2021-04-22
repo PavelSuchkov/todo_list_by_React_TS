@@ -14,7 +14,7 @@ let changeTaskTitleCallBack = action('title is changed');
 let changeTaskStatusCallBack = action('status is changed');
 let removeTaskCallBack = action('task is removed');
 
-const Template: Story<TaskPropsType> = (args: TaskPropsType) => <Task {...args}/>;
+const Template: Story<TaskPropsType> = (args) => <Task {...args}/>;
 
 let baseArgs = {
     changeTaskTitleCallBack,
@@ -25,17 +25,15 @@ let baseArgs = {
 export const TaskIsDoneStories = Template.bind({});
 
 TaskIsDoneStories.args = {
-...baseArgs,
-    task: {id: '1', title: 'React', isDone: true},
-    todolistId: 'todolistId'
+    task: {id: '1', title: 'JS', isDone: true},
+    todolistId: 'todolistId1'
 };
 
 export const TaskIsNotDoneStories = Template.bind({});
 
 TaskIsNotDoneStories.args = {
-    ...baseArgs,
-    task: {id: '2', title: 'React-Redux', isDone: false},
-    todolistId: 'todolistId'
+    task: {id: '2', title: "Milk", isDone: false},
+    todolistId: 'todolistId2'
 };
 
 

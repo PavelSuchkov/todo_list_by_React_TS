@@ -9,45 +9,36 @@ import {useDispatch} from "react-redux";
 export type TaskPropsType = {
     todolistId: string
     task: TaskType
-    isDone: boolean
-    title: string
 }
-
 export const Task = React.memo(({
                                     todolistId,
-                                    task,
-                                    isDone,
-                                    title
+                                    task
                                 }: TaskPropsType) => {
 
     console.log('Task was rendered')
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
 
     const changeTaskTitle = useCallback((newTitle: string) => {
         dispatch(changeTitleAC(task.id, newTitle, todolistId))
-    }, [ dispatch, task.id, todolistId])
-
+    }, [ dispatch, task.id, todolistId]);
 
     const changeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         dispatch(changeTaskStatusAC(task.id, e.currentTarget.checked, todolistId))
-    }, [dispatch, task.id, todolistId])
-
+    }, [dispatch, task.id, todolistId]);
 
     const removeTask = useCallback(() => {
         dispatch(removeTaskAC(task.id, todolistId))
-    }, [dispatch, task.id, todolistId])
+    }, [dispatch, task.id, todolistId]);
 
     return (
-        <li className={isDone ? "is-done" : ''}>
-            <Checkbox checked={isDone}
+        <li className={task.isDone ? "is-done" : ''}>
+            <Checkbox checked={task.isDone}
                       color={'primary'}
                       onChange={changeTaskStatus}/>
-            <EditableSpan title={title} changeTitle={changeTaskTitle}/>
+            <EditableSpan title={task.title} changeTitle={changeTaskTitle}/>
             <IconButton aria-label="delete" onClick={removeTask} color={'primary'}>
                 <Delete/>
             </IconButton>
         </li>
     )
-
 })

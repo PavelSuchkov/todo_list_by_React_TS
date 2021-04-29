@@ -7,11 +7,11 @@ import {changeTaskStatusAC, changeTitleAC, removeTaskAC} from "../state/tasks-re
 import {useDispatch} from "react-redux";
 
 export type TaskPropsType = {
-    todolistId: string
+    todoListId: string
     task: TaskType
 }
 export const Task = React.memo(({
-                                    todolistId,
+                                    todoListId,
                                     task
                                 }: TaskPropsType) => {
 
@@ -19,16 +19,16 @@ export const Task = React.memo(({
     const dispatch = useDispatch();
 
     const changeTaskTitle = useCallback((newTitle: string) => {
-        dispatch(changeTitleAC(task.id, newTitle, todolistId))
-    }, [ dispatch, task.id, todolistId]);
+        dispatch(changeTitleAC(task.id, newTitle, todoListId))
+    }, [ dispatch, task.id, todoListId]);
 
     const changeTaskStatus = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(changeTaskStatusAC(task.id, e.currentTarget.checked, todolistId))
-    }, [dispatch, task.id, todolistId]);
+        dispatch(changeTaskStatusAC(task.id, e.currentTarget.checked, todoListId))
+    }, [dispatch, task.id, todoListId]);
 
     const removeTask = useCallback(() => {
-        dispatch(removeTaskAC(task.id, todolistId))
-    }, [dispatch, task.id, todolistId]);
+        dispatch(removeTaskAC(task.id, todoListId))
+    }, [dispatch, task.id, todoListId]);
 
     return (
         <li className={task.isDone ? "is-done" : ''}>

@@ -67,7 +67,7 @@ export const TodoList = React.memo(({
 
         return (
             <Task
-                todolistId={todoListID}
+                todoListId={todoListID}
                 task={t}
                 key={t.id}/>
         )

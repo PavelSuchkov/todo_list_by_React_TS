@@ -15,7 +15,6 @@ export const Task = React.memo(({
                                     task
                                 }: TaskPropsType) => {
 
-    console.log('Task was rendered')
     const dispatch = useDispatch();
 
     const changeTaskTitle = useCallback((newTitle: string) => {

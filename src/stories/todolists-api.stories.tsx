@@ -131,7 +131,6 @@ export const UpdateTask = () => {
             startDate : '',
             deadline : ''})
             .then((response) => {
-                debugger;
                 setState(response.data);})
     }, [])
 

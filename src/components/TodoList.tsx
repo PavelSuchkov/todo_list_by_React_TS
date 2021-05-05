@@ -26,7 +26,6 @@ export const TodoList = React.memo(({
                                         changeTodoListFilter,
                                         changeTodoListTitle
                                     }: TodoListPropsType) => {
-    console.log('todolist was rendered');
 
     const tasks = useSelector<AppRootStateType, Array<TaskType>>(state => state.tasks[todoListID])
     const dispatch = useDispatch();
@@ -103,4 +102,4 @@ export const TodoList = React.memo(({
     )
 })
 
-export default TodoList;
+// export default TodoList;

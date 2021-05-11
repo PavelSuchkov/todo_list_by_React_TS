@@ -199,6 +199,7 @@ export const changeTaskTitleTC = (taskId: string, title: string, todolistId: str
             priority: foundTask.priority,
             description: foundTask.description,
             deadline: foundTask.deadline
+
         }
         todolistsAPI.updateTask(todolistId, taskId, model)
             .then((res) => {
